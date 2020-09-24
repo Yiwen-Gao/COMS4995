@@ -1,5 +1,8 @@
 # Enhanced Code Navigation in VSCode
 
+[![GitHub issues](https://img.shields.io/github/issues/Yiwen-Gao/COMS4995)](https://github.com/Yiwen-Gao/COMS4995/issues)
+[![GitHub license](https://img.shields.io/github/license/Yiwen-Gao/COMS4995)](https://github.com/Yiwen-Gao/COMS4995)
+
 ## Problem
 Easy and intuitive code navigation is necessary for a developer to understand and work with large codebases. One text editor feature that I find myself using frequently when I don't understand a particular function/variable usage is to CMD + click on the function/variable name and jump directly to its definition. However, this makes me lose my place in the code, so it's difficult to navigate back to what I was originally looking at. I'd like to automate the renavigation process by implementing a key command or UI button that takes the user from the function/variable definition back to the usage.
 
