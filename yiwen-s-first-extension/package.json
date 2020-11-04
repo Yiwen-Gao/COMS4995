@@ -10,14 +10,30 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:yiwen-s-first-extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "yiwen-s-first-extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.addLocation",
+				"title": "Add Location"
+			},
+			{
+				"command": "extension.removeLocation",
+				"title": "Remove Location"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.addLocation", 
+				"key": "Ctrl+Shift+A",
+				"mac": "Cmd+Shift+A"
+			},
+			{
+				"command": "extension.removeLocation",
+				"key": "Ctrl+Shift+B",
+				"mac": "Cmd+Shift+B"
 			}
 		]
 	},
