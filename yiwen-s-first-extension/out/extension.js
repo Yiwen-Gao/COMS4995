@@ -8,7 +8,8 @@ const vscode = require("vscode");
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 function activate(context) {
-    var stack = [];
+    const maxLen = 5;
+    var data = [];
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
@@ -17,40 +18,47 @@ function activate(context) {
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with registerCommand
     // The commandId parameter must match the command field in package.json
-    let addLocation = vscode.commands.registerCommand('extension.addLocation', () => {
-        const activeEditor = vscode.window.activeTextEditor;
-        if (!activeEditor) {
+    let addData = vscode.commands.registerCommand('extension.addData', () => {
+        console.log('enter addData');
+        const editor = vscode.window.activeTextEditor;
+        const selection = editor.selection; 
+        if (!editor || selection.empty) {
             return;
         }
 
-        vscode.commands.executeCommand(
-            'vscode.executeDefinitionProvider', 
-            activeEditor.document.uri, 
-            activeEditor.selection.active
-        ).then((locations) => {
-            const curr = locations[0];
-            stack.push(curr);
-            console.log('curr pos:', curr);
-            return vscode.commands.executeCommand('editor.action.goToDefinition');
-            // return vscode.commands.executeCommand('vscode.open', curr.uri);
-        // }).then(() => {
-        //     const curr = stack[stack.length - 1];
-        //     return vscode.commands.executeCommand('cursorMove', curr.uri, curr.range);
-        // }).then(() => {
-
-        }).catch(err => console.log(err));
+        const text = editor.document.getText(selection);
+        if (data.length >= maxLen) {
+            data.pop(0);
+        } 
+        data.push(text);
+        console.log(data);
     });
 
-    let removeLocation = vscode.commands.registerCommand('extension.removeLocation', () => {
-        if (locations.length > 0) {
-            const curr = locations.pop();
-            console.log(`remove location ${curr}`);
+    let removeData = vscode.commands.registerCommand('extension.removeData', () => {
+        console.log('enter removeData');
+        const editor = vscode.window.activeTextEditor;
+        const selection = editor.selection; 
+        if (!editor || data.length === 0) {
+            return;
         }
+    
+        editor.edit(builder => {
+            const text = data.pop();
+            builder.replace(selection, text);
+        })
+        .then(success => {
+            if (success) {
+                const position = editor.selection.end; 
+                editor.selection = new vscode.Selection(position, position);
+            }
+        });
+        console.log(data);
     });
 
-    context.subscriptions.push(addLocation);
-    context.subscriptions.push(removeLocation);
+    context.subscriptions.push(addData);
+    context.subscriptions.push(removeData);
 }
+
 exports.activate = activate;
 // this method is called when your extension is deactivated
 function deactivate() { }

@@ -16,22 +16,22 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.addLocation",
-				"title": "Add Location"
+				"command": "extension.addData",
+				"title": "Add Data"
 			},
 			{
-				"command": "extension.removeLocation",
-				"title": "Remove Location"
+				"command": "extension.removeData",
+				"title": "Remove Data"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.addLocation", 
+				"command": "extension.addData", 
 				"key": "Ctrl+Shift+A",
 				"mac": "Cmd+Shift+A"
 			},
 			{
-				"command": "extension.removeLocation",
+				"command": "extension.removeData",
 				"key": "Ctrl+Shift+B",
 				"mac": "Cmd+Shift+B"
 			}
