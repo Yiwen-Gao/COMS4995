@@ -2,7 +2,6 @@
 .DS_Store
 
 # Node
-.eslintrc.json
 node_modules
 
 # VSCode
