@@ -15,10 +15,22 @@ export class Clipboard {
     }
 
     mergeCopy(text: string) {
-
+        if (this.data) {
+            this.data[this.data.length - 1] += text;
+        } else {
+            this.copy(text);
+        }
     }
 
     paste(): string | undefined {
+        if (this.data) {
+            return this.data[this.data.length - 1];
+        } else {
+            return undefined;
+        }
+    }
+
+    removePaste(): string | undefined {
         return this.data.pop();
     }
 

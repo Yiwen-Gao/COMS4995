@@ -34,6 +34,30 @@ suite('Extension Test Suite', () => {
 		const output = clipboard.paste();
 
 		const data = clipboard.getData();
+		assert.strictEqual(1, data.length);
+		assert.strictEqual(input, data[0]);
+		assert.strictEqual(input, output);
+	});
+
+	test('merge copy', () => {
+		let clipboard = new Clipboard();
+		const input1 = 'test1';
+		const input2 = 'test2';
+		clipboard.copy(input1);
+		clipboard.mergeCopy(input2);
+
+		const data = clipboard.getData();
+		assert.strictEqual(1, data.length);
+		assert.strictEqual(`${input1}${input2}`, data[0]);
+	});
+
+	test('remove paste', () => {
+		let clipboard = new Clipboard();
+		const input = 'test';
+		clipboard.copy(input);
+		const output = clipboard.removePaste();
+
+		const data = clipboard.getData();
 		assert.strictEqual(0, data.length);
 		assert.strictEqual(input, output);
 	});

@@ -16,24 +16,42 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.addData",
-				"title": "Add Data"
+				"command": "extension.copy",
+				"title": "Copy Text"
 			},
 			{
-				"command": "extension.removeData",
-				"title": "Remove Data"
+				"command": "extension.mergeCopy",
+				"title": "Merge and Copy Text"
+			},
+			{
+				"command": "extension.paste",
+				"title": "Paste Text"
+			},
+			{
+				"command": "extension.removePaste",
+				"title": "Remove and Paste Text"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.addData", 
-				"key": "Ctrl+Shift+A",
-				"mac": "Cmd+Shift+A"
+				"command": "extension.copy",
+				"key": "Ctrl+C",
+				"mac": "Cmd+C"
 			},
 			{
-				"command": "extension.removeData",
-				"key": "Ctrl+Shift+B",
-				"mac": "Cmd+Shift+B"
+				"command": "extension.mergeCopy",
+				"key": "Ctrl+;",
+				"mac": "Cmd+;"
+			},
+			{
+				"command": "extension.paste",
+				"key": "Ctrl+V",
+				"mac": "Cmd+V"
+			},
+			{
+				"command": "extension.removePaste",
+				"key": "Ctrl+'",
+				"mac": "Cmd+'"
 			}
 		]
 	},
@@ -46,13 +64,14 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.50.0",
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^12.11.7",
-		"eslint": "^7.9.0",
+		"@types/vscode": "^1.50.0",
 		"@typescript-eslint/eslint-plugin": "^4.1.1",
 		"@typescript-eslint/parser": "^4.1.1",
+		"coveralls": "^3.1.0",
+		"eslint": "^7.9.0",
 		"glob": "^7.1.6",
 		"mocha": "^8.1.3",
 		"typescript": "^4.0.2",

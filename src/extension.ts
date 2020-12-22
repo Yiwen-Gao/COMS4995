@@ -9,8 +9,8 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('extension is active!');
     let clipboard = new Clipboard();
 
-    let addData = vscode.commands.registerCommand('extension.addData', () => {
-        console.log('enter addData');
+    let copy = vscode.commands.registerCommand('extension.copy', () => {
+        console.log('enter copy');
         const editor = vscode.window.activeTextEditor;
         if (editor) {
 			const selection = editor.selection; 
@@ -20,10 +20,23 @@ export function activate(context: vscode.ExtensionContext) {
 				console.log(clipboard.getData());
 			}
         } 
+	});
+	
+	let mergeCopy = vscode.commands.registerCommand('extension.mergeCopy', () => {
+        console.log('enter mergeCopy');
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+			const selection = editor.selection; 
+			if (!selection.isEmpty) {
+				const text = editor.document.getText(selection);
+				clipboard.mergeCopy(text);
+				console.log(clipboard.getData());
+			}
+        } 
     });
 
-    let removeData = vscode.commands.registerCommand('extension.removeData', () => {
-        console.log('enter removeData');
+    let paste = vscode.commands.registerCommand('extension.paste', () => {
+        console.log('enter paste');
         const editor = vscode.window.activeTextEditor;
         if (editor) {
 			const selection = editor.selection; 
@@ -41,10 +54,33 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 			console.log(clipboard.getData());
         }
+	});
+	
+	let removePaste = vscode.commands.registerCommand('extension.removePaste', () => {
+        console.log('enter removePaste');
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+			const selection = editor.selection; 
+			editor.edit(builder => {
+				const text = clipboard.removePaste();
+				if (text !== undefined) {
+					builder.replace(selection, text);
+				}
+			})
+			.then(success => {
+				if (success) {
+					const position = editor.selection.end; 
+					editor.selection = new vscode.Selection(position, position);
+				}
+			});
+			console.log(clipboard.getData());
+        }
     });
 
-    context.subscriptions.push(addData);
-    context.subscriptions.push(removeData);
+	context.subscriptions.push(copy);
+	context.subscriptions.push(mergeCopy);
+	context.subscriptions.push(paste);
+	context.subscriptions.push(removePaste);
 }
 
 // this method is called when your extension is deactivated
