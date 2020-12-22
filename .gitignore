@@ -1,5 +1,11 @@
+# MacOS
 .DS_Store
-*/node_modules
-*/.eslintrc.json
-*/.vscode/
-*/.vscodeignore
+
+# Node
+.eslintrc.json
+node_modules
+
+# VSCode
+out
+.vscode/
+.vscodeignore

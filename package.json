@@ -1,7 +1,7 @@
 {
-	"name": "yiwen-s-first-extension",
-	"displayName": "Yiwen's First Extension",
-	"description": "Just playing around with the extension environment :)",
+	"name": "renavigate",
+	"displayName": "renavigate",
+	"description": "Multiclipboard Features",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.50.0"
