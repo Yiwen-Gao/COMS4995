@@ -1,13 +1,13 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { Clipboard } from './clipboard';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	console.log('extension is active!');
-    const maxLen = 5;
-    var data:string[] = [];
+    let clipboard = new Clipboard();
 
     let addData = vscode.commands.registerCommand('extension.addData', () => {
         console.log('enter addData');
@@ -16,11 +16,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const selection = editor.selection; 
 			if (!selection.isEmpty) {
 				const text = editor.document.getText(selection);
-				if (data.length >= maxLen) {
-					data.shift();
-				} 
-				data.push(text);
-				console.log(data);
+				clipboard.copy(text);
+				console.log(clipboard.getData());
 			}
         } 
     });
@@ -28,10 +25,10 @@ export function activate(context: vscode.ExtensionContext) {
     let removeData = vscode.commands.registerCommand('extension.removeData', () => {
         console.log('enter removeData');
         const editor = vscode.window.activeTextEditor;
-        if (editor && data.length > 0) {
+        if (editor) {
 			const selection = editor.selection; 
 			editor.edit(builder => {
-				const text = data.pop();
+				const text = clipboard.paste();
 				if (text !== undefined) {
 					builder.replace(selection, text);
 				}
@@ -42,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 					editor.selection = new vscode.Selection(position, position);
 				}
 			});
-			console.log(data);
+			console.log(clipboard.getData());
         }
     });
 
