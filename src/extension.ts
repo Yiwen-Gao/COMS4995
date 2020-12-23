@@ -1,14 +1,19 @@
 // The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { Clipboard } from './clipboard';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+/**
+ * Set up custom VSCode commands
+ * Function is called when extension is first activated
+ * @param {vscode.ExtensionContext} context current context
+ */
 export function activate(context: vscode.ExtensionContext) {
 	console.log('extension is active!');
     let clipboard = new Clipboard();
 
+	/**
+	 * If editor is active and selection isn't empty, copy text to clipboard as new entry
+	 */
     let copy = vscode.commands.registerCommand('extension.copy', () => {
         console.log('enter copy');
         const editor = vscode.window.activeTextEditor;
@@ -22,6 +27,9 @@ export function activate(context: vscode.ExtensionContext) {
         } 
 	});
 	
+	/**
+	 * If editor is active and selection isn't empty, copy text to clipboard as part of previous entry
+	 */
 	let mergeCopy = vscode.commands.registerCommand('extension.mergeCopy', () => {
         console.log('enter mergeCopy');
         const editor = vscode.window.activeTextEditor;
@@ -35,6 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
         } 
     });
 
+	/**
+	 * If editor is active, paste text to editor
+	 */
     let paste = vscode.commands.registerCommand('extension.paste', () => {
         console.log('enter paste');
         const editor = vscode.window.activeTextEditor;
@@ -56,6 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
         }
 	});
 	
+	/**
+	 * If editor is active, copy text to editor and remove from clipboard
+	 */
 	let removePaste = vscode.commands.registerCommand('extension.removePaste', () => {
         console.log('enter removePaste');
         const editor = vscode.window.activeTextEditor;
@@ -83,5 +97,8 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(removePaste);
 }
 
-// this method is called when your extension is deactivated
+
+/**
+ * Function is called when extension is deactivated
+ */
 export function deactivate() {}
