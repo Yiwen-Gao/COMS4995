@@ -9,8 +9,8 @@ Easy and intuitive code manipulation is necessary to understand and work with la
 
 ## Usage
 CMD+C (CTRL+C): copy the selected text
-CMD+V (CTRL+V): paste the most recently copied text
 CMD+; (CTRL+;): merge the selected text with the most recently copied text
+CMD+V (CTRL+V): paste the most recently copied text
 CMD+' (CTRL+'): paste the most recently copied text and delete it from the clipboard
 
 ## Demo

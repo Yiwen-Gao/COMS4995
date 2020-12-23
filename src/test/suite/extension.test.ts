@@ -62,13 +62,24 @@ suite('Extension Test Suite', () => {
 		assert.strictEqual(input, output);
 	});
 
+	test('at most five items', () => {
+		let clipboard = new Clipboard();
+		const input = 'test';
+		for (let i = 0; i < 100; i++) {
+			clipboard.copy(input);
+		}
+
+		const data = clipboard.getData();
+		assert.strictEqual(5, data.length);
+	});
+
 	test('no copy if empty selection', async () => {
 		// const uri = vscode.Uri.file(path.join(`${__dirname}/../${exampleFile}`));
 		// const doc = await vscode.workspace.openTextDocument(uri);
 		// const editor = await vscode.window.showTextDocument(doc);
 	});
 
-	test('no paste if no previous copies', () => {
+	test('no paste if no previous copies', async () => {
 
 	});
 });
