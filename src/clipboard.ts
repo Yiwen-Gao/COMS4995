@@ -36,7 +36,7 @@ export class Clipboard {
 
     /**
      * Get the most recent copied text
-     * @returns most recent entry in clipboard or undefined if clipboard is empty
+     * @returns {string | undefined} most recent entry in clipboard or undefined if clipboard is empty
      */
     paste(): string | undefined {
         if (this.data) {
@@ -48,14 +48,14 @@ export class Clipboard {
 
     /**
      * Remove and get the most recent copied text 
-     * @returns most recent entry in clipboard or undefined if clipboard is empty
+     * @returns {string | undefined} most recent entry in clipboard or undefined if clipboard is empty
      */
     removePaste(): string | undefined {
         return this.data.pop();
     }
 
     /**
-     * @returns current entries in clipboard 
+     * @returns {string[]} current entries in clipboard 
      */
     getData() : string[] {
         return this.data;

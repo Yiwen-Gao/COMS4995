@@ -8,3 +8,8 @@ node_modules
 out
 .vscode/
 .vscodeignore
+
+# ReadTheDocs
+docs/_build
+docs/_static
+docs/_templates
