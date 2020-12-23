@@ -14,5 +14,5 @@ CMD+; (CTRL+;): merge the selected text with the most recently copied text
 CMD+' (CTRL+'): paste the most recently copied text and delete it from the clipboard
 
 ## Demo
-![demo](/Users/yiwengao/Downloads/demo.gif)
+![demo](./demo.gif)
 
